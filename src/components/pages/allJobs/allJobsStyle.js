@@ -5,7 +5,6 @@ background-color: #F3F3F3;
 display:flex;
 flex-direction:column;
 align-items: center;
-height:100vw;
 `
 export const JobsText = styled.div`
 height: 300px;
@@ -50,6 +49,9 @@ align-items:center;
 flex : 1.5;
 `
 export const Jobs = styled.div`
+display:flex;
+flex-direction: column;
+gap:20px;
 height:fit-content;
 margin-top:100px;
 width: 80%;
