@@ -9,7 +9,11 @@ import {
   JobsText,
   JobsWrapper,
 } from "./allJobsStyle";
+import Chip from '@mui/joy/Chip';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import InputLabel from "@mui/material/InputLabel";
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -130,42 +134,56 @@ export default function RecipeReviewCard() {
         </FiltersRight>
       </FiltersWrapper>
       <Jobs>
-      {filteredData &&
-              filteredData.map((data) => (
-          <Card  key={data.id} sx={{ width: "100%", borderRadius: "15px"}}>
-            <CardContent sx={{ display: "flex", gap: "50px" }}>
-              <JobImg/>
-                <p style={{border: "solid 1px black"}}>{data.name}</p>
-                <p>{data.corporateType}</p>
-                <p>{data.location}</p>
-              <p>{data.salary}</p>
-              <p>UI/UX Design</p>
-              <ExpandMore
-                onClick={() => handleExpandClick(data._id)}
-                aria-expanded={expanded[data._id]}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardContent>
-            <Collapse in={expanded[data._id]} timeout="auto">
-              <CardContent>
-                <Typography paragraph>Method:</Typography>
-                <Typography paragraph>Heat 1/2</Typography>
-                <Typography paragraph>Heat oil in</Typography>
-                <Typography paragraph>
-                  Add rice and stir very gently to distribute. Top with
-                  artichokes and minutes more. (Discard any mussels that
-                  don&apos;t open.)
-                </Typography>
-                <Typography>
-                  Set aside off of the heat to let rest for 10 minutes, and then
-                  serve.
-                </Typography>
+        {filteredData &&
+          filteredData.map((data) => (
+            <Card key={data.id} sx={{ width: "100%", borderRadius: "15px", padding: "5px" }}>
+              <CardContent sx={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: "flex", flex: "1", gap: "10px" }}>
+                  <JobImg />
+                  <div>
+                    <h3 style={{ margin: "0px" }}>{data.name}</h3>
+                    <p style={{ margin: "0px" }}>{data.corporateType}</p>
+                  </div>
+                </div>
+                <div style={{ display: "flex", flex: "1", gap: "20px" }}>
+                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocationOnIcon />}>
+                    {data.location}
+                  </Chip>
+                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocalAtmIcon />}>
+                    {data.salary}
+                  </Chip>
+                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<WorkOutlineIcon />}>
+                    {data.employmentType}
+                  </Chip>
+                </div>
+                <div style={{ display: "flex", flex: "1" }}>
+                  <ExpandMore
+                    onClick={() => handleExpandClick(data._id)}
+                    aria-expanded={expanded[data._id]}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </ExpandMore>
+                </div>
               </CardContent>
-            </Collapse>
-          </Card>
-        ))}
+              <Collapse in={expanded[data._id]} timeout="auto">
+                <CardContent>
+                  <Typography paragraph>Method:</Typography>
+                  <Typography paragraph>Heat 1/2</Typography>
+                  <Typography paragraph>Heat oil in</Typography>
+                  <Typography paragraph>
+                    Add rice and stir very gently to distribute. Top with
+                    artichokes and minutes more. (Discard any mussels that
+                    don&apos;t open.)
+                  </Typography>
+                  <Typography>
+                    Set aside off of the heat to let rest for 10 minutes, and then
+                    serve.
+                  </Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          ))}
       </Jobs>
     </JobsWrapper>
   );

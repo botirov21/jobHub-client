@@ -7,6 +7,7 @@ display:flex;
 flex-direction:column;
 align-items: center;
 padding-bottom: 40px;
+height: 100%;
 `
 export const JobsText = styled.div`
 height: 300px;
@@ -30,9 +31,8 @@ display:flex;
 background-color:#FFFFFF;
 border: solid #ECECEC 1px;
 border-radius: 25px;
-position: absolute;
-z-index:2;  
-top:220px;
+margin-top: -75px;
+z-index:2;
 @media (max-width: 435px) {
     display: none;
 
@@ -56,7 +56,7 @@ flex-direction: column;
 border-radius: 25px;
 gap:20px;
 height:fit-content;
-margin-top:100px;
+margin-top:50px;
 width: 80%;
 `
 export const JobImg = styled.div`
@@ -67,7 +67,7 @@ background-size: cover;
 width: 48.42px;
 height: 48.433px;
 `
-export const CardData = styled.div`
+// export const CardData = styled.div`
 
-`
+// `
 
