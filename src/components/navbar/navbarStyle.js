@@ -12,8 +12,7 @@ width:100vw;
 export const NavbarTop = styled.div`
 height: 60px;
 border-bottom: solid #ECECEC 1px;
-margin-left:10%;
-margin-right:10%;
+margin: 0 10%;
 display: flex;
 justify-content: space-between;
 align-items:center;
