@@ -19,13 +19,20 @@ align-items: center;
 background-color:#FFFFFF;
 position: relative;
 
-p{
+h3{
     font-family: Outfit;
     font-size: 40px;
+    margin:0px
+}
+p{
+    color: #AAAAAA;
+    margin:3px;
+    font-family: Outfit;
+    font-size: 24px;
 }
 `
 export const FiltersWrapper = styled.div`
-height: 150px;
+height:fit-content;
 width: 80%;
 display:flex;
 background-color:#FFFFFF;
@@ -33,6 +40,7 @@ border: solid #ECECEC 1px;
 border-radius: 25px;
 margin-top: -75px;
 z-index:2;
+padding:5px;
 @media (max-width: 435px) {
     display: none;
 

@@ -100,10 +100,11 @@ export default function RecipeReviewCard() {
   return (
     <JobsWrapper>
       <JobsText>
-        <p>
-          Find <span style={{ color: "#4348DB" }}>Web3</span> and Crypto jobs
+        <h3>
+          Find <span style={{ color: "#4348DB" }}>Developer</span> and Other jobs
           for Students and Graduates
-        </p>
+        </h3>
+        <p >Connecting Universities to JobHub</p>
       </JobsText>
       <FiltersWrapper>
         <FiltersLeft>
@@ -141,18 +142,18 @@ export default function RecipeReviewCard() {
                 <div style={{ display: "flex", flex: "1", gap: "10px" }}>
                   <JobImg />
                   <div>
-                    <h3 style={{ margin: "0px" }}>{data.name}</h3>
-                    <p style={{ margin: "0px" }}>{data.corporateType}</p>
+                    <h3 style={{ fontFamily: "Outfit", fontWeight: "400", color: "#4348DB", margin: "0px" }}>{data.name}</h3>
+                    <p style={{ fontFamily: "Outfit", fontWeight: "400", margin: "0px" }}>{data.corporateType}</p>
                   </div>
                 </div>
                 <div style={{ display: "flex", flex: "1", gap: "20px" }}>
-                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocationOnIcon />}>
+                  <Chip sx={{ fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocationOnIcon />}>
                     {data.location}
                   </Chip>
-                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocalAtmIcon />}>
+                  <Chip sx={{  fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocalAtmIcon />}>
                     {data.salary}
                   </Chip>
-                  <Chip sx={{ padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<WorkOutlineIcon />}>
+                  <Chip sx={{  fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<WorkOutlineIcon />}>
                     {data.employmentType}
                   </Chip>
                 </div>
@@ -168,18 +169,20 @@ export default function RecipeReviewCard() {
               </CardContent>
               <Collapse in={expanded[data._id]} timeout="auto">
                 <CardContent>
-                  <Typography paragraph>Method:</Typography>
-                  <Typography paragraph>Heat 1/2</Typography>
-                  <Typography paragraph>Heat oil in</Typography>
-                  <Typography paragraph>
-                    Add rice and stir very gently to distribute. Top with
-                    artichokes and minutes more. (Discard any mussels that
-                    don&apos;t open.)
-                  </Typography>
-                  <Typography>
-                    Set aside off of the heat to let rest for 10 minutes, and then
-                    serve.
-                  </Typography>
+                  <Typography sx={{ margin: "3px", fontFamily: "Montserrat", fontWeight: "bold" }} paragraph>About the role:</Typography>
+                  <Typography sx={{ fontFamily: "Outfit", fontWeight: 'light' }} paragraph>{data.role}</Typography>
+                  {data.responsibilities && (
+                    <>
+                      <Typography sx={{ margin: "3px", fontFamily: "Montserrat", fontWeight: "bold" }} paragraph>Responsibilities:</Typography>
+                      <ul style={{ marginTop: "3px" }}>
+                        {data.responsibilities.split(',').map((responsibility, index) => (
+                          <li style={{ fontFamily: "Outfit", fontWeight: "300" }} key={index}>{responsibility.trim()}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  <Typography sx={{ margin: "3px", fontFamily: "Montserrat", fontWeight: "bold" }} paragraph>Our ideal candidate:</Typography>
+                  <Typography sx={{ fontFamily: "Outfit", fontWeight: 'light' }} paragraph>{data.idealCandidate}</Typography>
                 </CardContent>
               </Collapse>
             </Card>
