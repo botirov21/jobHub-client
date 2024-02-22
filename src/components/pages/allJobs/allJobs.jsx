@@ -1,13 +1,18 @@
 import * as React from "react";
 import {
   CardData,
+  ChipWrapper,
+  ExpandMoreWrapper,
   FiltersLeft,
   FiltersRight,
   FiltersWrapper,
+  ImgWrapper,
   JobImg,
   Jobs,
   JobsText,
   JobsWrapper,
+  MobileWrapper,
+  UploadTimeWrapper,
 } from "./allJobsStyle";
 import Chip from '@mui/joy/Chip';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -102,8 +107,8 @@ export default function RecipeReviewCard() {
       <JobsText>
         <h3>
           Find <span style={{ color: "#4348DB" }}>Developer</span> and Other jobs
-          for Students and Graduates
         </h3>
+        <h3>for Students and Graduates</h3>
         <p >Connecting Universities to JobHub</p>
       </JobsText>
       <FiltersWrapper>
@@ -138,26 +143,30 @@ export default function RecipeReviewCard() {
         {filteredData &&
           filteredData.map((data) => (
             <Card key={data.id} sx={{ width: "100%", borderRadius: "15px", padding: "5px" }}>
-              <CardContent sx={{ display: "flex", alignItems: "center" }}>
-                <div style={{ display: "flex", flex: "1", gap: "10px" }}>
+              <CardContent className="resposiveCardContent" sx={{ display: "flex", alignItems: "center" }}>
+                <ImgWrapper>
                   <JobImg />
                   <div>
                     <h3 style={{ fontFamily: "Outfit", fontWeight: "400", color: "#4348DB", margin: "0px" }}>{data.name}</h3>
                     <p style={{ fontFamily: "Outfit", fontWeight: "400", margin: "0px" }}>{data.corporateType}</p>
                   </div>
-                </div>
-                <div style={{ display: "flex", flex: "1", gap: "20px" }}>
-                  <Chip sx={{ fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocationOnIcon />}>
+                </ImgWrapper>
+                <ChipWrapper>
+                  <Chip className="chip" variant="soft"startDecorator={<LocationOnIcon/>}>
                     {data.location}
                   </Chip>
-                  <Chip sx={{  fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<LocalAtmIcon />}>
+                  <Chip className="chip" variant="soft" startDecorator={<LocalAtmIcon/>}>
                     {data.salary}
                   </Chip>
-                  <Chip sx={{  fontFamily: "Outfit", fontWeight: "Bold", padding: "5px", borderRadius: "5px", background: "#F6F6F6" }} variant="soft" startDecorator={<WorkOutlineIcon />}>
+                  <Chip className="chip" variant="soft" startDecorator={<WorkOutlineIcon/>}>
                     {data.employmentType}
                   </Chip>
-                </div>
-                <div style={{ display: "flex", flex: "1" }}>
+                </ChipWrapper>
+                <UploadTimeWrapper>
+                  <p>124 applicants</p>
+                  <h3>3 hours ago</h3>
+                </UploadTimeWrapper>
+                <ExpandMoreWrapper>
                   <ExpandMore
                     onClick={() => handleExpandClick(data._id)}
                     aria-expanded={expanded[data._id]}
@@ -165,7 +174,11 @@ export default function RecipeReviewCard() {
                   >
                     <ExpandMoreIcon />
                   </ExpandMore>
-                </div>
+                  <MobileWrapper>
+                   <p>124 applicants</p>
+                   <h3>3 hours ago</h3>
+                  </MobileWrapper>
+                </ExpandMoreWrapper>
               </CardContent>
               <Collapse in={expanded[data._id]} timeout="auto">
                 <CardContent>

@@ -18,7 +18,7 @@ const Navbar = () => {
                     <div>Designer</div>
                     <div>Other</div>
                 </NavbarPages>
-                <Button  variant="contained" disableElevation  sx={{background: "#4348DB", textTransform: "none"}}>
+                <Button className='MyPofile'  variant="contained" disableElevation  sx={{background: "#4348DB", textTransform: "none"}}>
                     Submit job for $199
                 </Button>
             </NavbarTop>

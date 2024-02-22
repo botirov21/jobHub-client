@@ -7,6 +7,7 @@ background-color:#FFFFFF;
 border-radius:10px;
 position:fixed;
 z-index:3;
+top: 0px;
 width:100vw;
 `
 export const NavbarTop = styled.div`
@@ -17,14 +18,26 @@ display: flex;
 justify-content: space-between;
 align-items:center;
 background-color:#FFFFFF;
-    
+@media (max-width: 950px) {
+.MyPofile{
+ display: none
+}
+}
+@media (max-width: 435px) { 
+.MyPofile{
+    display: none
+}
+}   
 `
 export const NavbarPages = styled.div`
 display: flex;
 gap:20px;
-@media (max-width: 435px) {
+@media (max-width: 950px) {
     display: none;
 
+}
+@media (max-width: 435px) {
+    display: none;
 }
 `
 export const NavbarText = styled.div`
