@@ -51,3 +51,32 @@ p{
     font-size: 40px;
 }
 `
+export const Hamburger = styled.div`
+display:none;
+@media (max-width: 950px) {
+    display: flex;
+
+}
+@media (max-width: 435px) {
+    display: flex;
+}
+`
+export const Hamburgerdata = styled.div`
+display: flex;
+flex-direction:column;
+gap:20px;
+padding: 5% 0% 0% 10%;
+p{
+font-family: Outfit;
+font-weight: 400px;
+font-size:20px;
+margin: 0px
+}
+h3{
+font-family: Outfit;
+font-weight: 600px;
+font-size:25px;
+color: #4348DB;
+margin-bottom: 5px;
+}
+`

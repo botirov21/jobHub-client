@@ -1,11 +1,15 @@
 import React from 'react'
-import { NavbarPages, NavbarTop, NavbarWrapper } from './navbarStyle'
+import { Hamburger, NavbarPages, NavbarTop, NavbarWrapper } from './navbarStyle'
 import Button from '@mui/material/Button';
+import Header from './resposiveHamburger';
 
 const Navbar = () => {
     return (
         <NavbarWrapper>
             <NavbarTop>
+                <Hamburger>
+                  <Header/>
+                </Hamburger>
                 <div>
                     <h3>JobHub</h3>
                 </div>
@@ -16,7 +20,6 @@ const Navbar = () => {
                     <div>Engineering</div>
                     <div>Marketer</div>
                     <div>Designer</div>
-                    <div>Other</div>
                 </NavbarPages>
                 <Button className='MyPofile'  variant="contained" disableElevation  sx={{background: "#4348DB", textTransform: "none"}}>
                     Submit job for $199

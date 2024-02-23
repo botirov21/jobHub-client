@@ -145,6 +145,12 @@ export const ExpandMoreWrapper = styled.div`
 display: flex;
 flex: 1;
 gap:20px;
+@media (max-width: 435px) {
+display: none;
+}
+@media (max-width: 950px) {
+display: none;
+}
 `
 export const UploadTimeWrapper = styled.div`
 display: flex;
@@ -154,14 +160,17 @@ align-items: end;
 p{
 margin:0px;
 }
-h3{
+h4{
 margin:0px;
 }
-@media (max-width: 435px) {
-display:none;
+@media (max-width: 950px) {
+display: flex;
+flex-direction:row;
+gap:20px;
+justify-content:space-between;
 }
 `
-export const MobileWrapper = styled.div`
+export const ExpandMoreWrapperMobile = styled.div`
 display: none;
 @media (max-width: 435px) {
 display: flex;

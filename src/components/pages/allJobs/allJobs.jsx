@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
-  CardData,
   ChipWrapper,
   ExpandMoreWrapper,
+  ExpandMoreWrapperMobile,
   FiltersLeft,
   FiltersRight,
   FiltersWrapper,
@@ -11,7 +11,6 @@ import {
   Jobs,
   JobsText,
   JobsWrapper,
-  MobileWrapper,
   UploadTimeWrapper,
 } from "./allJobsStyle";
 import Chip from '@mui/joy/Chip';
@@ -22,28 +21,17 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
-  return <Button variant="contained" {...other}>More detail</Button>;
-  // const { expand, ...other } = props;
-  // return <IconButton {...other} />;
+  return <ExpandMoreIcon {...other} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
@@ -152,32 +140,37 @@ export default function RecipeReviewCard() {
                   </div>
                 </ImgWrapper>
                 <ChipWrapper>
-                  <Chip className="chip" variant="soft"startDecorator={<LocationOnIcon/>}>
+                  <Chip className="chip" variant="soft" startDecorator={<LocationOnIcon />}>
                     {data.location}
                   </Chip>
-                  <Chip className="chip" variant="soft" startDecorator={<LocalAtmIcon/>}>
+                  <Chip className="chip" variant="soft" startDecorator={<LocalAtmIcon />}>
                     {data.salary}
                   </Chip>
-                  <Chip className="chip" variant="soft" startDecorator={<WorkOutlineIcon/>}>
+                  <Chip className="chip" variant="soft" startDecorator={<WorkOutlineIcon />}>
                     {data.employmentType}
                   </Chip>
                 </ChipWrapper>
                 <UploadTimeWrapper>
                   <p>124 applicants</p>
-                  <h3>3 hours ago</h3>
+                  <h4>3 hours ago</h4>
+                  <ExpandMoreWrapperMobile>
+                  <ExpandMore
+                      expand={expanded[data._id]}
+                      onClick={() => handleExpandClick(data._id)}
+                      aria-expanded={expanded[data._id]}
+                      aria-label="show more"
+                    />
+                  </ExpandMoreWrapperMobile>
+
                 </UploadTimeWrapper>
                 <ExpandMoreWrapper>
                   <ExpandMore
+                    expand={expanded[data._id]}
                     onClick={() => handleExpandClick(data._id)}
                     aria-expanded={expanded[data._id]}
                     aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                  <MobileWrapper>
-                   <p>124 applicants</p>
-                   <h3>3 hours ago</h3>
-                  </MobileWrapper>
+                  />
+
                 </ExpandMoreWrapper>
               </CardContent>
               <Collapse in={expanded[data._id]} timeout="auto">
