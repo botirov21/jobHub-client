@@ -32,7 +32,7 @@ justify-content: space-between;
 `
 export const FirstColumn = styled.div`
 display: flex;
-flex: 1;
+flex: 2;
 `
 export const SecondColumn = styled.div`
 display: flex;

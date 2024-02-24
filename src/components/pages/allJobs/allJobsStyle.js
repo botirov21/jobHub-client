@@ -78,6 +78,7 @@ export const FiltersRight = styled.div`
 display:flex;
 justify-content: center;
 align-items:center;
+gap:20px;
 flex : 1.5;
 @media (max-width: 950px) {
 display: none;

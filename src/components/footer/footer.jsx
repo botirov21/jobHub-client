@@ -10,7 +10,7 @@ const Footer = () => {
             <FooterData >
                 <FirstColumn>
                     <ul>
-                        cryptojob
+                        JobHub
                         <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis dolor sit amet lorem. </li>
                     </ul>
                 </FirstColumn>

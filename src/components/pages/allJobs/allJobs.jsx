@@ -16,11 +16,7 @@ import {
 import Chip from '@mui/joy/Chip';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
-import InputLabel from "@mui/material/InputLabel";
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -28,6 +24,10 @@ import CardContent from "@mui/material/CardContent";
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import IconButton from '@mui/joy/IconButton';
+import CloseRounded from '@mui/icons-material/CloseRounded';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -43,22 +43,13 @@ const ExpandMore = styled((props) => {
 const BASEURL = "http://localhost:5050/api/v1/";
 
 export default function RecipeReviewCard() {
+  const [value, setValue] = React.useState('');
+  const action = React.useRef(null);
   const [expanded, setExpanded] = React.useState({});
-  const [age, setAge] = React.useState("");
   const [allData, setAllData] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [filteredData, setFilteredData] = React.useState("");
-
-  const handleExpandClick = (_id) => {
-    setExpanded((prevExpanded) => ({
-      ...prevExpanded,
-      [_id]: !prevExpanded[_id],
-    }));
-  };
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  const [checkActive, setCheckActive] = React.useState(true);
 
   // Function to fetch all data
   React.useEffect(() => {
@@ -74,13 +65,13 @@ export default function RecipeReviewCard() {
         });
         setExpanded(initialExpandedState);
       } catch (error) {
-        console.log("Motor data is wrong:", error);
+        console.log(" data is wrong:", error);
       }
     };
     fetchData();
   }, []);
-  console.log(allData);
 
+  //Input Search Data
   const handleSearch = (query) => {
     setSearch(query);
     const filtered = allData.filter(
@@ -90,6 +81,55 @@ export default function RecipeReviewCard() {
     );
     setFilteredData(filtered);
   };
+
+  //Filter by Location
+  const handleLocationFilter = (location) => {
+    if (checkActive) {
+      const checkedBox = allData.filter((data) => data.location === location);
+      setFilteredData(checkedBox);
+    } else {
+      setFilteredData(allData);
+    }
+    setCheckActive(!checkActive);
+  };
+
+  //Filter by Salary
+  const handleFilterSalary = (salary) => {
+    if (checkActive) {
+      const checkedBox = allData.filter((data) => data.salary === salary);
+      setFilteredData(checkedBox);
+    } else {
+      setFilteredData(allData);
+    }
+    setCheckActive(!checkActive);
+  };
+
+  //Filter by Salary
+  const handleFilterJobPositon = (jobPosition) => {
+    if (checkActive) {
+      const checkedBox = allData.filter((data) => data.jobPosition === jobPosition);
+      setFilteredData(checkedBox);
+    } else {
+      setFilteredData(allData);
+    }
+    setCheckActive(!checkActive);
+  };
+
+  //Reset Data
+  const handleResetAllData = () => {
+    setValue(null); // Reset the selected value
+    setFilteredData(allData); // Reset the filtered data to all data
+    setCheckActive(true); // Reset the checkbox state
+  };
+
+  //Expand Job Card 
+  const handleExpandClick = (_id) => {
+    setExpanded((prevExpanded) => ({
+      ...prevExpanded,
+      [_id]: !prevExpanded[_id],
+    }));
+  };
+
   return (
     <JobsWrapper>
       <JobsText>
@@ -104,27 +144,113 @@ export default function RecipeReviewCard() {
           <TextField fullWidth label="Search for jobs.." id="fullWidth" onChange={(e) => handleSearch(e.target.value)} />
         </FiltersLeft>
         <FiltersRight>
-          {[1, 2, 3].map((index) => (
-            <FormControl key={index} sx={{ m: 1, minWidth: 200 }} size="small">
-              <InputLabel id={`demo-select-small-label-${index}`}>
-                Age
-              </InputLabel>
-              <Select
-                labelId={`demo-select-small-label-${index}`}
-                id={`demo-select-small-${index}`}
-                value={age}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          ))}
+          <Select
+            action={action}
+            value={value}
+            placeholder="Location"
+            onChange={(e, newValue) => setValue(newValue)}
+            {...(value && {
+              // display the button and remove select indicator
+              // when user has selected a value
+              endDecorator: (
+                <IconButton
+                  size="sm"
+                  variant="plain"
+                  color="neutral"
+                  onMouseDown={(event) => {
+                    // don't open the popup when clicking on this button
+                    event.stopPropagation();
+                  }}
+                  onClick={() => {
+                    setValue(null);
+                    handleResetAllData();
+                    action.current?.focusVisible();
+                  }}
+                >
+                  <CloseRounded />
+                </IconButton>
+              ),
+              indicator: null,
+            })}
+            sx={{ minWidth: 200 }}
+          >
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("South Korea")} value="South Korea">South Korea</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("United States")} value="United States">United States</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("England")} value="England">England</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("Japan")} value="Japan">Japan</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("China")} value="China">China</Option>
+          </Select>
+          <Select
+            action={action}
+            value={value}
+            placeholder="Salary Range"
+            onChange={(e, newValue) => setValue(newValue)}
+            {...(value && {
+              // display the button and remove select indicator
+              // when user has selected a value
+              endDecorator: (
+                <IconButton
+                  size="sm"
+                  variant="plain"
+                  color="neutral"
+                  onMouseDown={(event) => {
+                    // don't open the popup when clicking on this button
+                    event.stopPropagation();
+                  }}
+                  onClick={() => {
+                    setValue(null);
+                    handleResetAllData();
+                    action.current?.focusVisible();
+                  }}
+                >
+                  <CloseRounded />
+                </IconButton>
+              ),
+              indicator: null,
+            })}
+            sx={{ minWidth: 200 }}
+          >
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterSalary("$50k-$80k")} value="$50k-$80k">$50k-$80k</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterSalary("$80k-$100k")} value="$80k-$100k">$80k-$100k</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterSalary("$100k-$120k")} value="$100k-$120k">$100k-$120k</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterSalary("$120k-$150k")} value="$120k-$150k">$120k-$150k</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterSalary("$150k-$200k")} value="$150k-$200k">$150k-$200k</Option>
+          </Select>
+          <Select
+            action={action}
+            value={value}
+            placeholder="Sort By"
+            onChange={(e, newValue) => setValue(newValue)}
+            {...(value && {
+              // display the button and remove select indicator
+              // when user has selected a value
+              endDecorator: (
+                <IconButton
+                  size="sm"
+                  variant="plain"
+                  color="neutral"
+                  onMouseDown={(event) => {
+                    // don't open the popup when clicking on this button
+                    event.stopPropagation();
+                  }}
+                  onClick={() => {
+                    setValue(null);
+                    handleResetAllData();
+                    action.current?.focusVisible();
+                  }}
+                >
+                  <CloseRounded />
+                </IconButton>
+              ),
+              indicator: null,
+            })}
+            sx={{ minWidth: 200 }}
+          >
+            <Option style={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterJobPositon("Developer")} value="Developer">Developer</Option>
+            <Option style={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterJobPositon("Designer")} value="Designer">Designer</Option>
+            <Option style={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterJobPositon("Manager")} value="Manager">Manager</Option>
+            <Option style={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleFilterJobPositon("Manager")} value="Japan">Manager</Option>
+          </Select>
         </FiltersRight>
       </FiltersWrapper>
       <Jobs>
@@ -154,7 +280,7 @@ export default function RecipeReviewCard() {
                   <p>124 applicants</p>
                   <h4>3 hours ago</h4>
                   <ExpandMoreWrapperMobile>
-                  <ExpandMore
+                    <ExpandMore
                       expand={expanded[data._id]}
                       onClick={() => handleExpandClick(data._id)}
                       aria-expanded={expanded[data._id]}
