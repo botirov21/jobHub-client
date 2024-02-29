@@ -11,7 +11,10 @@ const Footer = () => {
                 <FirstColumn>
                     <ul>
                         JobHub
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis dolor sit amet lorem. </li>
+                        <li>An online platform connecting job seekers with
+                            employers, streamlining recruitment and fostering career
+                            opportunities. It's a centralized hub for efficient, transparent, and
+                            convenient hiring interactions</li>
                     </ul>
                 </FirstColumn>
                 <SecondColumn>
@@ -44,7 +47,7 @@ const Footer = () => {
             </FooterData>
             <SocialLinks>
                 <div><p>© 2024 JobHub. All rights reserved</p></div>
-                <div> <TwitterIcon/> <FacebookIcon/> <InstagramIcon/> <TelegramIcon/> </div>
+                <div> <TwitterIcon /> <FacebookIcon /> <InstagramIcon /> <TelegramIcon /> </div>
             </SocialLinks>
         </FooterWrapper>
     );

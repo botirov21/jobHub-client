@@ -40,10 +40,12 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const BASEURL = "http://localhost:5050/api/v1/";
+const BASEURL = "https://api-job-offer.isabek.uz/api/v1/jobs/allJobs";
 
-export default function RecipeReviewCard() {
-  const [value, setValue] = React.useState('');
+export default function AllJobs() {
+  const [locationValue, setLocationValue] = React.useState('');
+  const [salaryValue, setSalaryValue] = React.useState('');
+  const [jobPositionValue, setJobPositionValue] = React.useState('');
   const action = React.useRef(null);
   const [expanded, setExpanded] = React.useState({});
   const [allData, setAllData] = React.useState([]);
@@ -55,7 +57,7 @@ export default function RecipeReviewCard() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASEURL}jobs/allJobs`);
+        const response = await fetch(`${BASEURL}`);
         const data = await response.json();
         setFilteredData(data.data);
         setAllData(data.data);
@@ -117,7 +119,9 @@ export default function RecipeReviewCard() {
 
   //Reset Data
   const handleResetAllData = () => {
-    setValue(null); // Reset the selected value
+    setLocationValue(null); // Reset the selected value
+    setSalaryValue(null); // Reset the selected value
+    setJobPositionValue(null); // Reset the selected value
     setFilteredData(allData); // Reset the filtered data to all data
     setCheckActive(true); // Reset the checkbox state
   };
@@ -146,10 +150,10 @@ export default function RecipeReviewCard() {
         <FiltersRight>
           <Select
             action={action}
-            value={value}
+            value={locationValue}
             placeholder="Location"
-            onChange={(e, newValue) => setValue(newValue)}
-            {...(value && {
+            onChange={(e, newLocationValue) => setLocationValue(newLocationValue)}
+            {...(locationValue && {
               // display the button and remove select indicator
               // when user has selected a value
               endDecorator: (
@@ -162,7 +166,7 @@ export default function RecipeReviewCard() {
                     event.stopPropagation();
                   }}
                   onClick={() => {
-                    setValue(null);
+                    setLocationValue(null);
                     handleResetAllData();
                     action.current?.focusVisible();
                   }}
@@ -178,14 +182,14 @@ export default function RecipeReviewCard() {
             <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("United States")} value="United States">United States</Option>
             <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("England")} value="England">England</Option>
             <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("Japan")} value="Japan">Japan</Option>
-            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("China")} value="China">China</Option>
+            <Option sx={{ fontFamily: "Outfit", fontWeight: "500" }} onClick={() => handleLocationFilter("Remote")} value="Remote">Remote</Option>
           </Select>
           <Select
             action={action}
-            value={value}
+            value={salaryValue}
             placeholder="Salary Range"
-            onChange={(e, newValue) => setValue(newValue)}
-            {...(value && {
+            onChange={(e, newSalaryValue) => setSalaryValue(newSalaryValue)}
+            {...(salaryValue && {
               // display the button and remove select indicator
               // when user has selected a value
               endDecorator: (
@@ -198,7 +202,7 @@ export default function RecipeReviewCard() {
                     event.stopPropagation();
                   }}
                   onClick={() => {
-                    setValue(null);
+                    setSalaryValue(null);
                     handleResetAllData();
                     action.current?.focusVisible();
                   }}
@@ -218,10 +222,10 @@ export default function RecipeReviewCard() {
           </Select>
           <Select
             action={action}
-            value={value}
+            value={jobPositionValue}
             placeholder="Sort By"
-            onChange={(e, newValue) => setValue(newValue)}
-            {...(value && {
+            onChange={(e, newJobPositionValue) => setJobPositionValue(newJobPositionValue)}
+            {...(jobPositionValue && {
               // display the button and remove select indicator
               // when user has selected a value
               endDecorator: (
@@ -234,7 +238,7 @@ export default function RecipeReviewCard() {
                     event.stopPropagation();
                   }}
                   onClick={() => {
-                    setValue(null);
+                    setJobPositionValue(null);
                     handleResetAllData();
                     action.current?.focusVisible();
                   }}
@@ -305,9 +309,9 @@ export default function RecipeReviewCard() {
                   <Typography sx={{ fontFamily: "Outfit", fontWeight: 'light' }} paragraph>{data.role}</Typography>
                   {data.responsibilities && (
                     <>
-                      <Typography sx={{ margin: "3px", fontFamily: "Montserrat", fontWeight: "bold" }} paragraph>Responsibilities:</Typography>
+                      <Typography sx={{ margin: "3px", fontFamily: "Montserrat", fontWeight: "bold" }} paragraph>Requirements:</Typography>
                       <ul style={{ marginTop: "3px" }}>
-                        {data.responsibilities.split(',').map((responsibility, index) => (
+                        {data.responsibilities.split('.').map((responsibility, index) => (
                           <li style={{ fontFamily: "Outfit", fontWeight: "300" }} key={index}>{responsibility.trim()}</li>
                         ))}
                       </ul>
