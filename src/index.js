@@ -7,6 +7,8 @@ import Footer from './components/footer/footer';
 import AllJobs from './components/pages/allJobs/allJobs';
 import DisplayNavbar from './components/navbar/displayNavbar';
 import AccountBox from './components/loginForm';
+import PartTime from './components/pages/partTime/partTime';
+import FullTime from './components/pages/fullTime/fullTime';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +18,8 @@ root.render(
     </DisplayNavbar>
     <Routes>
       <Route path="/" element={<AllJobs />} />
+      <Route path="/fullTime" element={<FullTime/>} />
+      <Route path="/partTime" element={<PartTime/>} />
       <Route path="/loginPage" element={<AccountBox />} />
     </Routes>
     <DisplayNavbar>

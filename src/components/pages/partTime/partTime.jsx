@@ -12,7 +12,7 @@ import {
   JobsText,
   JobsWrapper,
   UploadTimeWrapper,
-} from "./allJobsStyle";
+} from "./partTimeStyle";
 import Chip from '@mui/joy/Chip';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
@@ -42,14 +42,13 @@ const ExpandMore = styled((props) => {
 
 const BASEURL = "https://api-job-offer.isabek.uz/api/v1/jobs/allJobs";
 
-export default function AllJobs() {
+export default function PartTime() {
   const [locationValue, setLocationValue] = React.useState('');
   const [salaryValue, setSalaryValue] = React.useState('');
   const [jobPositionValue, setJobPositionValue] = React.useState('');
   const action = React.useRef(null);
   const [expanded, setExpanded] = React.useState({});
   const [allData, setAllData] = React.useState([]);
-  const [search, setSearch] = React.useState("");
   const [filteredData, setFilteredData] = React.useState("");
   const [checkActive, setCheckActive] = React.useState(true);
 
@@ -59,7 +58,8 @@ export default function AllJobs() {
       try {
         const response = await fetch(`${BASEURL}`);
         const data = await response.json();
-        setFilteredData(data.data);
+        const partTimeJobs = data.data.filter(job => job.employmentType  === 'Part-time');
+        setFilteredData(partTimeJobs);
         setAllData(data.data);
         const initialExpandedState = {};
         data.data.forEach((item) => {
@@ -75,7 +75,6 @@ export default function AllJobs() {
 
   //Input Search Data
   const handleSearch = (query) => {
-    setSearch(query);
     const filtered = allData.filter(
       (data) =>
         data.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -139,6 +138,7 @@ export default function AllJobs() {
     const data = new Date(createdAt);
     return data.toISOString().split("T")[0];
   };
+
   return (
     <JobsWrapper>
       <JobsText>
@@ -307,6 +307,7 @@ export default function AllJobs() {
                     aria-expanded={expanded[data._id]}
                     aria-label="show more"
                   />
+
                 </ExpandMoreWrapper>
               </CardContent>
               <Collapse in={expanded[data._id]} timeout="auto">

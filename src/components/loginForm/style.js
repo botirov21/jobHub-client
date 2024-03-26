@@ -66,6 +66,7 @@ export const SubmitButton = styled.button`
 
   &:hover {
     filter: brightness(1.03);
+    background: green;
   }
 `;
 
@@ -79,6 +80,11 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items:center;
+    gap:20%;
     width:100vw;
     height:100vh;
 `;
+
+export const LogoWrapper = styled.div`
+
+`

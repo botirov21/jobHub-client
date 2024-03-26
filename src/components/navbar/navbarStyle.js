@@ -1,5 +1,9 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
+export const NavLink = styled(Link)`
+text-decoration: none;
+`
 
 export const NavbarWrapper = styled.div`
 height: 60px;
@@ -18,7 +22,10 @@ display: flex;
 justify-content: space-between;
 align-items:center;
 background-color:#FFFFFF;
-@media (max-width: 950px) {
+.h3{
+color: #4348DB;
+}
+@media (max-width: 820px) {
 .MyPofile{
  display: none
 }
@@ -29,10 +36,28 @@ background-color:#FFFFFF;
 }
 }   
 `
+export const ProfileWrapper = styled.div`
+display: flex;
+align-items: center;
+@media (max-width: 820px){
+display: none;
+}
+`
 export const NavbarPages = styled.div`
 display: flex;
 gap:20px;
-@media (max-width: 950px) {
+p{
+font-family: Outfit;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal
+}
+p:hover{
+color: #4348DB;
+cursor: pointer;
+}
+@media (max-width: 820px) {
     display: none;
 
 }
@@ -53,7 +78,7 @@ p{
 `
 export const Hamburger = styled.div`
 display:none;
-@media (max-width: 950px) {
+@media (max-width: 820px) {
     display: flex;
 
 }
@@ -68,9 +93,15 @@ gap:20px;
 padding: 5% 0% 0% 10%;
 p{
 font-family: Outfit;
-font-weight: 400px;
-font-size:20px;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 margin: 0px
+}
+p:hover{
+color: #4348DB;
+cursor: pointer;
 }
 h3{
 font-family: Outfit;

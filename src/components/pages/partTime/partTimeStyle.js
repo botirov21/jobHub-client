@@ -163,19 +163,17 @@ margin:0px;
 }
 h4{
 margin:0px;
-}       
-@media (max-width: 820px) {
+}
+@media (max-width: 950px) {
 display: flex;
 flex-direction:row;
 gap:20px;
 justify-content:space-between;
-width:100%;
-
 }
 `
 export const ExpandMoreWrapperMobile = styled.div`
 display: none;
-@media (max-width: 820px) {
+@media (max-width: 435px) {
 display: flex;
 flex-direction: column;
 p{
@@ -194,7 +192,4 @@ background-size: cover;
 width: 48.42px;
 height: 48.433px;
 `
-// export const CardData = styled.div`
-
-// `
 
